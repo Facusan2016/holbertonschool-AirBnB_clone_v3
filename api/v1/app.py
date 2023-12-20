@@ -16,6 +16,11 @@ def teardown_db(exception):
     storage.close()
 
 
+@app.errornotfoud(404)
+def page_not_found(error):
+    """ handler for 404 errors """
+    return jsonify({"error": "Not found"}), 404
+
 if __name__ == '__main__':
     """Main function of Flask app"""
     app.run(host=os.getenv('HBNB_API_HOTS', '0.0.0.0'),
