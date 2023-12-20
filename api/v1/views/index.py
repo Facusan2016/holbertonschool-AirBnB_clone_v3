@@ -27,6 +27,6 @@ def count():
     }
 
     for cls in clss:
-        count = storage.coun(cls)
+        count = storage.count(cls)
         dictob[clss.get(cls)] = count
     return jsonify(dictob)
