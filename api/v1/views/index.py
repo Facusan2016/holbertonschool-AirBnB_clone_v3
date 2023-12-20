@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """App module using Flask"""
 
 from api.v1.views import app_views
