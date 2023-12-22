@@ -3,21 +3,21 @@
 
 from models import storage
 from models.state import State
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify, Response, Blueprint, request, abort
 from api.v1.views import app_views
 
 
 all_states = storage.all(State)
 
 
-@app_views.get('/states/')
+@app_views.route('/states/', methods=['GET'], strict_slashes=False)
 def stateAll():
     """GET route to return all States"""
     all_states_arr = [obj.to_dict() for obj in all_states.values()]
     return jsonify(all_states_arr)
 
 
-@app_views.get('/states/<state_id>')
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def stateId(state_id):
     """GET route to return one specific State"""
 
@@ -29,7 +29,8 @@ def stateId(state_id):
     return state.to_dict()
 
 
-@app_views.delete('/states/<state_id>')
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def deleteStateId(state_id):
     """DELETE route to delete a State"""
     try:
@@ -45,7 +46,7 @@ def deleteStateId(state_id):
         return abort(404)
 
 
-@app_views.post('/states/')
+@app_views.route('/states/', methods=['POST'], strict_slashes=False)
 def postState():
     """Posts a new State"""
     from flask import request
@@ -61,7 +62,7 @@ def postState():
     return "Not a JSON", 400
 
 
-@app_views.put('/states/<state_id>')
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def putState(state_id):
     obj = storage.get(State, state_id)
 
