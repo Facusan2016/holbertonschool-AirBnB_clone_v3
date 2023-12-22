@@ -10,7 +10,7 @@ from api.v1.views import app_views
 all_states = storage.all(State)
 
 
-@app_views.get('/states')
+@app_views.get('/states/')
 def stateAll():
     """GET route to return all States"""
     all_states_arr = [obj.to_dict() for obj in all_states.values()]
@@ -45,7 +45,7 @@ def deleteStateId(state_id):
         return abort(404)
 
 
-@app_views.post('/states')
+@app_views.post('/states/')
 def postState():
     """Posts a new State"""
     from flask import request
