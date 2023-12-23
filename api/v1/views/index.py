@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 """App module using Flask"""
 
+
+from flask import Flask, Blueprint, jsonify, request
 from api.v1.views import app_views
-from flask import jsonify
 from models import storage
 
 
-@app_views.route('/status')
+@app_views.route('/status', methods=['GET'])
 def statusRoute():
     """Status Route"""
-    return jsonify({
+    if request.method == 'GET':
+        return jsonify({
         "status": "OK"
     })
 
